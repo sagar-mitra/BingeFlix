@@ -20,7 +20,7 @@ const Login = () => {
       </div>
 
       {/* Sign-In form  */}
-      <div className="relative flex items-center justify-center border h-9/12">
+      <div className="relative flex items-center justify-center h-9/12">
         {click ? (
           <LoginForm />
         ) : (
