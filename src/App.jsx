@@ -3,7 +3,7 @@ import Body from "./components/Body";
 
 const App = () => {
   return (
-    <div>
+    <div className="font-helveticaBold">
       <Body />
     </div>
   );
