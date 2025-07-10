@@ -4,6 +4,11 @@ import {
   checkValidDataName,
   checkValidDataPassword,
 } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const LoginForm = () => {
   const [fullName, setFullName] = useState("");
@@ -15,7 +20,6 @@ const LoginForm = () => {
 
   // Handle form submission
   const handleSubmit = () => {
-
     // validation
     const errorEmailMessage = checkValidDataEmail(email);
     const errorPasswordMessage = checkValidDataPassword(password);
@@ -29,11 +33,42 @@ const LoginForm = () => {
     } else if (!isSignInForm && errorNameMessage) {
       setErrorMessage(errorNameMessage);
     } else {
-      setErrorMessage(null); 
+      setErrorMessage(null);
+    }
+
+    if (errorEmailMessage || errorPasswordMessage) return;
+
+    // Sign-up and Sign-in logic
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("Signed in", user.email);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(errorCode === "auth/invalid-credential") {
+            setErrorMessage("Invalid credential: User not found")
+          }
+        });
     }
   };
 
-  // Sign In or Sign Up
+  // Sign In or Sign Up link toggle
   const toggleSignInForm = () => {
     setIsSignInForm((prev) => !prev);
     setEmail("");
