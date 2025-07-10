@@ -21,6 +21,7 @@ const LoginForm = () => {
     const errorPasswordMessage = checkValidDataPassword(password);
     const errorNameMessage = checkValidDataName(fullName);
 
+    // set the error message
     if (errorEmailMessage) {
       setErrorMessage(errorEmailMessage);
     } else if (errorPasswordMessage) {
