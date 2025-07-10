@@ -1,11 +1,15 @@
 import React from "react";
 import Body from "./components/Body";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const App = () => {
   return (
-    <div className="font-helveticaBold">
-      <Body />
-    </div>
+    <Provider store={appStore}>
+      <div className="font-helveticaBold">
+        <Body />
+      </div>
+    </Provider>
   );
 };
 

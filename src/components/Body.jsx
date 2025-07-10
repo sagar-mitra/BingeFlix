@@ -1,9 +1,19 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import Browse from "./Browse";
 import Login from "./login";
+import LoginForm from "./LoginForm";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
+import { auth } from "../utils/firebase";
 
 const Body = () => {
+  const dispatch = useDispatch();
+
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -13,7 +23,24 @@ const Body = () => {
       path: "/browse",
       element: <Browse />,
     },
+    {
+      path: "/login",
+      element: <LoginForm />,
+    },
   ]);
+
+ 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, displayName, email } = user;
+        dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -23,3 +50,9 @@ const Body = () => {
 };
 
 export default Body;
+
+/* 💡NOTE:
+        - useEffect([]) ensures the onAuthStateChanged listener is set up only once, when the component first mounts — not on every re-render.
+        
+        -  onAuthStateChanged itself is responsible for reacting to auth changes, like sign in/out — not useEffect.
+*/
