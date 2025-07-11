@@ -63,7 +63,6 @@ const LoginForm = () => {
               dispatch(
                 addUser({ uid: uid, displayName: displayName, email: email, photoURL: DEFAULT_PROFILE_PICTURE })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               if (error.code === "auth/invalid-credential") {
@@ -85,7 +84,6 @@ const LoginForm = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          navigate("/browse");
         })
         .catch((error) => {
           if (error.code === "auth/invalid-credential") {

@@ -1,31 +1,67 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../assets/logo.png";
 import NavLinks from "./NavLinks";
 import { useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
 import { RxHamburgerMenu } from "react-icons/rx";
 import SignOutButton from "./SignOutButton";
-import {auth} from "../utils/firebase"
-import { useNavigate } from "react-router-dom";
-import {signOut} from "firebase/auth"
+import { auth } from "../utils/firebase";
+import { useLocation, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser, removeUser } from "../utils/userSlice";
+import { DEFAULT_PROFILE_PICTURE } from "../utils/constant";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const [clicked, setClicked] = useState(false);
-  // const [signOut, setSignOut] = useState(false);
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation(); // we can get path location
 
-  const navigate = useNavigate()
-
+  // Sign out button
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        navigate("/")
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  // Firebase auth change
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, displayName, email, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            displayName: displayName,
+            email: email,
+            photoURL: DEFAULT_PROFILE_PICTURE,
+          })
+        );
+        navigate("/browse");
+        console.log("Auth state changed. User is:", user);
+        console.log("Current location:", location.pathname);
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        // Only redirect to / if NOT on /login
+        // const publicRoutes = ["/", "/login"];
+        // if (!publicRoutes.includes(location.pathname)) {
+        //   navigate("/");
+        // }
+        if (location.pathname !== "/" && location.pathname !== "/login") {
+          navigate("/");
+        }
+      }
+    });
+  }, []);
 
   return (
     <div
@@ -76,7 +112,7 @@ const Header = () => {
       {/* NavLinks for mobile */}
       {clicked && (
         <div className="lg:hidden absolute top-14 left-1/2 transform -translate-x-1/2 text-center w-full py-4 ">
-          <NavLinks clicked={clicked} handleSignOut={handleSignOut}/>
+          <NavLinks clicked={clicked} handleSignOut={handleSignOut} />
         </div>
       )}
     </div>
