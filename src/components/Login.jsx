@@ -25,12 +25,12 @@ const Login = () => {
 
       {/* Text and Sign-In button  */}
       <div className="relative flex items-center justify-center h-9/12">
-        <div className="w-7/12 flex flex-col items-center gap-6">
-          <h1 className="text-white text-6xl font-extrabold leading-20 text-center tracking-wide">
+        <div className="sm:w-7/12 p-3 sm:p-0 flex flex-col items-center gap-6">
+          <h1 className="text-white text-4xl xs:text-5xl sm:text-6xl font-extrabold leading-12 sm:leading-20 text-center tracking-wide">
             Unlimited movies, TV shows and more
           </h1>
           <button
-            className="w-2/12 px-9 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out cursor-pointer "
+            className="px-6 xs:px-9 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out cursor-pointer "
             onClick={handleButton}
           >
             Sign In

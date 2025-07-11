@@ -108,12 +108,12 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="relative w-screen h-screen border overflow-hidden">
       {/* Header and Background image */}
       <div>
         <Header />
         <img
-          className="top-0 left-0 w-full h-full object-cover absolute -z-10"
+          className="top-0 left-0 w-full h-full object-cover absolute -z-10 "
           src={LOGIN_BACKGROUND_IMG}
           alt="background"
         />
@@ -121,10 +121,11 @@ const LoginForm = () => {
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70 -z-0" />
       </div>
 
-      {/* Login form */}
-      <div className="flex items-center justify-center h-9/12">
-        <div className="relative w-4/12 bg-black/60 p-8 sm:p-12 rounded-lg shadow-lg ">
-          <h1 className="text-white text-3xl sm:text-4xl font-bold mb-8">
+      {/* Login form  outer*/}
+      <div className="relative flex items-center justify-center mt-7 xs:mt-15 md:mt-10 lg:mt-7 h-11/12 lg:h-10/12">
+        {/* Login form  */}
+        <div className="relative w-11/12 xs:w-96 sm:w-7/12 border border-red-500 md:w-6/12 lg:w-4/12 bg-black/60 p-8 sm:p-12 rounded-lg shadow-lg">
+          <h1 className="text-white text-xl mb-4 xs:text-2xl sm:text-3xl md:text-4xl font-bold xs:mb-6 md:mb-8">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
 
@@ -135,7 +136,7 @@ const LoginForm = () => {
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full p-3 md:p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
@@ -145,7 +146,7 @@ const LoginForm = () => {
             <input
               type="text"
               placeholder="Email Address"
-              className="w-full p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="w-full p-3 md:p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -155,19 +156,19 @@ const LoginForm = () => {
             <input
               type="password"
               placeholder="Password"
-              className="w-full p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="w-full p-3 md:p-4 rounded-md bg-zinc-700/40 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-600"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
 
             {/* Error Message  */}
-            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+            {errorMessage && <p className="text-red-500 text-sm sm:text-base">{errorMessage}</p>}
 
             {/* Sign In/Out Button */}
             <button
               onClick={handleSubmit}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-md transition duration-300 ease-in-out cursor-pointer"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 sm:py-3 rounded-md transition duration-300 ease-in-out cursor-pointer"
             >
               {isSignInForm ? "Sign In" : "Sign Up"}
             </button>
@@ -183,7 +184,7 @@ const LoginForm = () => {
           {/* Forgot Password Link */}
           {isSignInForm ? (
             <div className="text-center mb-6">
-              <a href="#" className="text-blue-500 hover:underline text-sm">
+              <a href="#" className="text-blue-500 hover:underline text-xs sm:text-sm">
                 Forgot password?
               </a>
             </div>
@@ -213,7 +214,7 @@ const LoginForm = () => {
           )}
 
           {/* New to Netflix? Sign up now. */}
-          <p className="text-zinc-400 text-base mb-4">
+          <p className="text-zinc-400 text-sm sm:text-base mb-4">
             {isSignInForm ? "New to Bingeflix?" : "Already have an account?"}
             <span
               className="text-white hover:underline font-semibold cursor-pointer"

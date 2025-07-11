@@ -29,7 +29,7 @@ const Body = () => {
     },
   ]);
 
- 
+ // Firebase auth change
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

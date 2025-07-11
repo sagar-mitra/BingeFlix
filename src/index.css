@@ -6,6 +6,6 @@
 @import "tailwindcss";
 
 @theme{
-    --font-helveticaBold: Helvetica  
-    
+    --font-helveticaBold: Helvetica  ;
+    --breakpoint-xs: 400px;
 }
