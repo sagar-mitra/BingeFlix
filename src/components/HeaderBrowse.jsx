@@ -4,9 +4,13 @@ import NavLinks from "./NavLinks";
 import { DEFAULT_PROFILE_PICTURE } from "../utils/constant";
 import { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
+import { useSelector } from "react-redux";
 
 const HeaderBrowse = () => {
   const [clicked, setClicked] = useState(false);
+
+  const user = useSelector((store) => store.user)
+
   return (
     <div className="relative flex  justify-between items-center px-2">
       {/* Left side  */}
@@ -20,8 +24,8 @@ const HeaderBrowse = () => {
       {/* Profile Picture and Burger Menu */}
       <div className="flex gap-5 items-center">
         <img
-          className="h-8 sm:h-10 cursor-pointer"
-          src={DEFAULT_PROFILE_PICTURE}
+          className="h-8 sm:h-10 cursor-pointer rounded-lg"
+          src={user.photoURL}
           alt=""
         />
         <button
@@ -36,10 +40,7 @@ const HeaderBrowse = () => {
         </button>
       </div>
 
-        {/* NavLinks for mobile */}
-      {clicked && (<div className="lg:hidden absolute top-14 left-1/2 transform -translate-x-1/2 text-center w-full py-4 ">
-        <NavLinks clicked={clicked} />
-      </div>)}
+      
     </div>
   );
 };

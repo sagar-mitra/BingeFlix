@@ -10,6 +10,7 @@ import LoginForm from "./LoginForm";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { auth } from "../utils/firebase";
+import { DEFAULT_PROFILE_PICTURE } from "../utils/constant";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,8 @@ const Body = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { uid, displayName, email } = user;
-        dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
+        const { uid, displayName, email, photoURL } = user;
+        dispatch(addUser({ uid: uid, displayName: displayName, email: email, photoURL: DEFAULT_PROFILE_PICTURE }));
       } else {
         // User is signed out
         dispatch(removeUser());

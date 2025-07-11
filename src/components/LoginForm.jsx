@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LOGIN_BACKGROUND_IMG } from "../utils/constant";
+import { DEFAULT_PROFILE_PICTURE, LOGIN_BACKGROUND_IMG } from "../utils/constant";
 import { auth } from "../utils/firebase";
 import Header from "./Header";
 import {
@@ -59,9 +59,9 @@ const LoginForm = () => {
             displayName: fullName,
           })
             .then(() => {
-              const { uid, displayName, email } = auth.currentUser;
+              const { uid, displayName, email, photoURL } = auth.currentUser;
               dispatch(
-                addUser({ uid: uid, displayName: displayName, email: email })
+                addUser({ uid: uid, displayName: displayName, email: email, photoURL: DEFAULT_PROFILE_PICTURE })
               );
               navigate("/browse");
             })
@@ -84,8 +84,7 @@ const LoginForm = () => {
       // Sign In
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // const user = userCredential.user;
-          console.log("Sign in");
+          const user = userCredential.user;
           navigate("/browse");
         })
         .catch((error) => {
@@ -124,7 +123,7 @@ const LoginForm = () => {
       {/* Login form  outer*/}
       <div className="relative flex items-center justify-center mt-7 xs:mt-15 md:mt-10 lg:mt-7 h-11/12 lg:h-10/12">
         {/* Login form  */}
-        <div className="relative w-11/12 xs:w-96 sm:w-7/12 border border-red-500 md:w-6/12 lg:w-4/12 bg-black/60 p-8 sm:p-12 rounded-lg shadow-lg">
+        <div className="relative w-11/12 xs:w-96 sm:w-7/12 md:w-6/12 lg:w-4/12 bg-black/60 p-8 sm:p-12 rounded-lg shadow-lg">
           <h1 className="text-white text-xl mb-4 xs:text-2xl sm:text-3xl md:text-4xl font-bold xs:mb-6 md:mb-8">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>

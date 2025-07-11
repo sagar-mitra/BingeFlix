@@ -1,6 +1,7 @@
 import React from "react";
+import SignOutButton from "./SignOutButton";
 
-const NavLinks = ({clicked}) => {
+const NavLinks = ({clicked, handleSignOut}) => {
   return (
     <div>
       <ul className={`flex ${clicked  && "flex-col"} text-lg font-medium gap-9`}>
@@ -8,6 +9,7 @@ const NavLinks = ({clicked}) => {
         <li>Movies</li>
         <li>TV Shows</li>
         <li>New & Popular</li>
+        {clicked && <li><SignOutButton handleSignOut={handleSignOut}/></li>}
       </ul>
     </div>
   );
