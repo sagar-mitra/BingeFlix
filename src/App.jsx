@@ -6,7 +6,7 @@ import appStore from "./utils/appStore";
 const App = () => {
   return (
     <Provider store={appStore}>
-      <div className="font-helveticaBold">
+      <div className="font-poppins">
         <Body />
       </div>
     </Provider>

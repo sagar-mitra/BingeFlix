@@ -34,7 +34,7 @@ const Header = () => {
 
   // Firebase auth change
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, displayName, email, photoURL } = user;
         dispatch(
@@ -46,8 +46,6 @@ const Header = () => {
           })
         );
         navigate("/browse");
-        console.log("Auth state changed. User is:", user);
-        console.log("Current location:", location.pathname);
       } else {
         // User is signed out
         dispatch(removeUser());
@@ -61,6 +59,10 @@ const Header = () => {
         }
       }
     });
+
+    // Unsubscribe when the component unmounts
+    return () => unsubscribe()
+
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 import { LOGIN_BACKGROUND_IMG } from "../utils/constant";
-import Header from "./Header";
+import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

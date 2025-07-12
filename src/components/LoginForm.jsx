@@ -56,12 +56,12 @@ const LoginForm = () => {
           const user = userCredential.user;
           // Updating user: Adding name
           updateProfile(user, {
-            displayName: fullName,
+            displayName: fullName, photoURL: DEFAULT_PROFILE_PICTURE
           })
             .then(() => {
               const { uid, displayName, email, photoURL } = auth.currentUser;
               dispatch(
-                addUser({ uid: uid, displayName: displayName, email: email, photoURL: DEFAULT_PROFILE_PICTURE })
+                addUser({ uid: uid, displayName: displayName, email: email, photoURL: photoURL })
               );
             })
             .catch((error) => {

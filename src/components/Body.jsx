@@ -1,17 +1,9 @@
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Browse from "./Browse";
-import Login from "./login";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Browse from "../pages/Browse";
+import Login from "../pages/Login";
 import LoginForm from "./LoginForm";
 
-
-
 const Body = () => {
-  
-
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -26,8 +18,6 @@ const Body = () => {
       element: <LoginForm />,
     },
   ]);
-
-
 
   return (
     <div>
