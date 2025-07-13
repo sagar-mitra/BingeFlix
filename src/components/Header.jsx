@@ -69,10 +69,10 @@ const Header = () => {
     <div
       className={`relative ${
         !user ? "px-5 xs:px-7 md:px-12 lg:px-32" : "px-2"
-      } z-50 ${!user && "text-white"} flex justify-between items-center`}
+      } z-50 text-white flex justify-between items-center`}
     >
       <img
-        className="w-24 xs:w-28 sm:w-32 md:w-40 lg:w-48"
+        className="w-15 xs:w-18 sm:w-24 md:w-28 lg:w-48"
         src={logo}
         alt="logo"
       />
@@ -88,7 +88,7 @@ const Header = () => {
           {/* Profile Picture and Burger Menu  */}
           <div className="flex gap-5 items-center">
             <img
-              className="h-8 sm:h-10 cursor-pointer rounded-lg"
+              className="h-5 sm:h-5 md:h-7 lg:h-10 cursor-pointer rounded sm:rounded-sm lg:rounded-lg"
               src={user.photoURL}
               alt=""
             />

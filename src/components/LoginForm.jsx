@@ -91,7 +91,6 @@ const LoginForm = () => {
           } else {
             setErrorMessage("Something went wrong. Try again.");
           }
-          console.log(error);
         });
     }
   };
